@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:github_repo_search_test/bloc/bloc/search_bloc.dart';
 import 'package:github_repo_search_test/presentation/consts/consts.dart';
 import 'package:github_repo_search_test/presentation/sizeconfig.dart';
 import 'package:github_repo_search_test/presentation/widgets/button.dart';
 
 class TextFieldStack extends StatelessWidget {
-  const TextFieldStack({
-    Key key,
+  TextFieldStack({
+    @required this.context,
+    Key? key,
   }) : super(key: key);
+  BuildContext? context;
+  Function? func() {
+    BlocProvider.of<SearchBloc>(context!)
+        .add(SearchRequested(searchInput: input));
+  }
 
+  String input = "";
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -15,11 +24,14 @@ class TextFieldStack extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         Positioned(
-          top: SizeConfig.blockSizeVertical * 20,
+          top: SizeConfig.blockSizeVertical! * 20,
           child: Container(
-            height: 40,
-            width: SizeConfig.blockSizeHorizontal * 90,
+            height: kHightTextField,
+            width: SizeConfig.blockSizeHorizontal! * 90,
             child: TextField(
+              onChanged: (i) {
+                input = i;
+              },
               maxLines: 1,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -33,13 +45,17 @@ class TextFieldStack extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: SizeConfig.blockSizeHorizontal * 5,
-          top: SizeConfig.blockSizeVertical * 20,
+          right: SizeConfig.blockSizeHorizontal! * 5,
+          top: SizeConfig.blockSizeVertical! * 20,
           child: Container(
               alignment: Alignment.centerRight,
-              height: 40,
-              width: SizeConfig.blockSizeHorizontal * 30,
-              child: TextButtonSearch()),
+              height: kHightTextField,
+              width: SizeConfig.blockSizeHorizontal! * 30,
+              child: TextButtonSearch(
+                func: () {
+                  func();
+                },
+              )),
         )
       ],
     );

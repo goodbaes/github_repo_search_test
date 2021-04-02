@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
+const String kGitHubUrl = "api.github.com";
+
+const String kGitHubApiSearch = "/search/repositories";
 const kColorBlue = (0xff58AFFF);
-const kBorderRadius = 50.0;
-const kFind = "поиск";
-const kTextResult = "результаты поиска";
-const kTextByReq = "по запросу";
-const kFindCount = "найдено";
-const kTextFind = "найти";
+const double kBorderRadius = 50.0;
+const double kHightTextField = 50.0;
+const String kFind = "поиск";
+const String kTextResult = "результаты поиска";
+const String kTextByReq = "по запросу";
+const String kFindCount = "найдено";
+const String kTextFind = "найти";
+const String kError = "ошибка";
 
 extension ExtendedPadding on Widget {
   withPadding16() {
