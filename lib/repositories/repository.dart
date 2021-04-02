@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:github_repo_search_test/models/model.dart';
+import 'package:github_repo_search_test/models/repositorymodel.dart';
 import 'package:github_repo_search_test/presentation/consts/consts.dart';
 import 'package:http/http.dart' as http;
 

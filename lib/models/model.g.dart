@@ -25,19 +25,20 @@ Map<String, dynamic> _$QueryResultToJson(QueryResult instance) =>
 
 RepoItem _$RepoItemFromJson(Map<String, dynamic> json) {
   var jsonOwner = json['owner'];
-
-  var objOwner = Owner.fromJson(jsonOwner);
+  var avOwner = Owner.fromJson(jsonOwner);
   return RepoItem(
-    description: json['description'] as String?,
+    time: json['updated_at'] as String?,
+    name: json['name'] as String?,
     fullName: json['full_name'] as String?,
-    avatarUrl: objOwner,
+    avatarUrl: avOwner,
     stargazersCount: json['stargazers_count'] as int?,
   );
 }
 
 Map<String, dynamic> _$RepoItemToJson(RepoItem instance) => <String, dynamic>{
+      'updated_at': instance.time,
       'full_name': instance.fullName,
-      'description': instance.description,
+      'name': instance.name,
       'avatar_url': instance.avatarUrl?.toJson(),
       'stargazers_count': instance.stargazersCount,
     };
@@ -45,10 +46,12 @@ Map<String, dynamic> _$RepoItemToJson(RepoItem instance) => <String, dynamic>{
 Owner _$OwnerFromJson(Map<String, dynamic> json) {
   $checkKeys(json, requiredKeys: const ['avatar_url']);
   return Owner(
+    username: json['login'] as String?,
     avatarUrl: json['avatar_url'] as String?,
   );
 }
 
 Map<String, dynamic> _$OwnerToJson(Owner instance) => <String, dynamic>{
       'avatar_url': instance.avatarUrl,
+      'login': instance.username,
     };

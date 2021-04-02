@@ -2,29 +2,22 @@ part of 'search_bloc.dart';
 
 @immutable
 abstract class SearchState extends Equatable {
-  static String? appbarText;
+  String? input;
   @override
-  List<Object?> get props => [appbarText];
+  List<Object?> get props => [];
 }
 
-class SearchInitial extends SearchState {
-  static String appbartext = kFind;
-}
+class SearchInitial extends SearchState {}
 
-class SearchLoading extends SearchState {
-  static String appbartext = kTextResult;
-}
+class SearchLoading extends SearchState {}
 
 class SearchSuccess extends SearchState {
-  static String appbartext = kTextResult;
-
-  SearchSuccess({this.queryResult});
+  SearchSuccess({this.queryResult, this.input});
   final QueryResult? queryResult;
+  final String? input;
 
   @override
   List<Object?> get props => [queryResult];
 }
 
-class SearchError extends SearchState {
-  static String appbartext = kError;
-}
+class SearchError extends SearchState {}

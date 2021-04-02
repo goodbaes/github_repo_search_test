@@ -29,19 +29,11 @@ class TextFieldStack extends StatelessWidget {
             height: kHightTextField,
             width: SizeConfig.blockSizeHorizontal! * 90,
             child: TextField(
-              onChanged: (i) {
-                input = i;
-              },
-              maxLines: 1,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(kBorderRadius),
-                  ),
-                ),
-                // suffix: TextButtonSearch(),
-              ),
-            ),
+                onChanged: (i) {
+                  input = i;
+                },
+                maxLines: 1,
+                decoration: kInputdec),
           ),
         ),
         Positioned(

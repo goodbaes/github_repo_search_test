@@ -8,41 +8,45 @@ import 'package:github_repo_search_test/presentation/widgets/mytext.dart';
 import 'package:github_repo_search_test/presentation/widgets/textfieldstack.dart';
 
 class SearchScreen extends StatelessWidget {
+  restart(context) {
+    BlocProvider.of<SearchBloc>(context).add(SearchStart());
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (context, state) {
-        String appbarTextL = kFind;
         return SafeArea(
-          child: Scaffold(
-            appBar: AppBar(
-              title: TextTittleApp(
-                text: appbarTextL,
+          child: WillPopScope(
+            onWillPop: () => restart(context),
+            child: Scaffold(
+              appBar: AppBar(
+                title: TextTittleApp(
+                  text: (state is SearchInitial) ? kFind : kTextResult,
+                ),
               ),
-            ),
-            body: Center(
-              child: (() {
-                if (state is SearchInitial) {
-                  appbarTextL = SearchInitial.appbartext;
-                  return TextFieldStack(
-                    context: context,
-                  );
-                }
-                if (state is SearchLoading) {
-                  appbarTextL = SearchLoading.appbartext;
-                  return CircularProgressIndicator.adaptive();
-                }
-                if (state is SearchSuccess) {
-                  appbarTextL = SearchSuccess.appbartext;
-                  return ResultScreen(queryResult: state.queryResult);
-                }
-                if (state is SearchError) {
-                  appbarTextL = SearchError.appbartext;
-
-                  return Text("Err");
-                }
-              }()),
+              body: Center(
+                child: (() {
+                  if (state is SearchInitial) {
+                    return TextFieldStack(
+                      context: context,
+                    );
+                  }
+                  if (state is SearchLoading) {
+                    return CircularProgressIndicator.adaptive();
+                  }
+                  if (state is SearchSuccess) {
+                    return ResultScreen(
+                      queryResult: state.queryResult,
+                      input: state.input,
+                    );
+                  }
+                  if (state is SearchError) {
+                    return Text("Err");
+                  }
+                }()),
+              ),
             ),
           ),
         );

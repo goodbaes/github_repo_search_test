@@ -1,3 +1,5 @@
+import 'package:github_repo_search_test/models/repositorymodel.dart';
+import 'package:github_repo_search_test/repositories/repository.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'model.g.dart';
@@ -22,8 +24,8 @@ class RepoItem {
   @JsonKey(name: 'full_name', required: true)
   String? fullName;
 
-  @JsonKey(name: 'description', required: true)
-  String? description;
+  @JsonKey(name: 'name', required: true)
+  String? name;
 
   @JsonKey(name: 'avatar_url', required: true)
   Owner? avatarUrl;
@@ -31,8 +33,15 @@ class RepoItem {
   @JsonKey(name: 'stargazers_count', required: true)
   int? stargazersCount;
 
+  @JsonKey(name: 'stargazers_count', required: true)
+  String? time;
+
   RepoItem(
-      {this.description, this.fullName, this.avatarUrl, this.stargazersCount});
+      {this.name,
+      this.fullName,
+      this.avatarUrl,
+      this.stargazersCount,
+      this.time});
   factory RepoItem.fromJson(Map<String, dynamic> json) =>
       _$RepoItemFromJson(json);
   Map<String, dynamic> toJson() => _$RepoItemToJson(this);
@@ -42,8 +51,21 @@ class RepoItem {
 class Owner {
   @JsonKey(name: 'avatar_url', required: true)
   String? avatarUrl;
+  @JsonKey(name: 'login')
+  String? username;
 
-  Owner({this.avatarUrl});
+  Owner({this.avatarUrl, this.username});
   factory Owner.fromJson(Map<String, dynamic> json) => _$OwnerFromJson(json);
   Map<String, dynamic> toJson() => _$OwnerToJson(this);
 }
+
+// @JsonSerializable(createFactory: true, createToJson: true, explicitToJson: true)
+// class Repository {
+//   @JsonKey(name: 'name', required: true)
+//   String? name;
+
+//   Repository({this.name});
+//   factory Repository.fromJson(Map<String, dynamic> json) =>
+//       _$RepositoryFromJson(json);
+//   Map<String, dynamic> toJson() => _$RepositoryToJson(this);
+// }
