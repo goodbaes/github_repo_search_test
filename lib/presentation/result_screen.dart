@@ -23,6 +23,9 @@ class _ResultScreenState extends State<ResultScreen> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Column(mainAxisSize: MainAxisSize.min, children: [
+          SizedBox(
+            height: 16,
+          ),
           Container(
             child: TextTittleSearch(
               color: Colors.grey,
@@ -39,7 +42,7 @@ class _ResultScreenState extends State<ResultScreen> {
               textResult: ": ${widget.queryResult!.totalCount.toString()}",
             ),
           ),
-        ]).withPadding8(),
+        ]),
         Flexible(
           child: ListView.builder(
             itemCount: widget.queryResult!.items!.length,
