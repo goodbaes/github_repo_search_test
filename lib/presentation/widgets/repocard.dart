@@ -27,7 +27,7 @@ class RepoCard extends StatelessWidget {
             width: 0.2,
             color: Colors.black,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(20))),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Column(
         children: [
           Row(
@@ -68,7 +68,14 @@ class RepoCard extends StatelessWidget {
             thickness: 1,
           ),
           Row(
-            children: [Text("Обновлено: "), Text(a)],
+            children: [
+              TextSpanLow(
+                color2: Colors.black,
+                color: Colors.grey,
+                text: "Обновлено: ",
+                textResult: a,
+              )
+            ],
           )
         ],
       ).withPadding16(),

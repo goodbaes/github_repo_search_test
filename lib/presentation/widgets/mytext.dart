@@ -75,6 +75,30 @@ class TextTittleSearch extends StatelessWidget {
   }
 }
 
+class TextSpanLow extends StatelessWidget {
+  const TextSpanLow({
+    @required this.color,
+    @required this.color2,
+    this.text,
+    this.textResult,
+    Key? key,
+  }) : super(key: key);
+  final String? text;
+  final String? textResult;
+  final Color? color;
+  final Color? color2;
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(children: [
+        TextSpan(text: text!, style: TextStyle(fontSize: 12, color: color)),
+        TextSpan(
+            text: textResult!, style: TextStyle(fontSize: 12, color: color2))
+      ]),
+    );
+  }
+}
+
 class Text10 extends StatelessWidget {
   Text10({
     this.text,
